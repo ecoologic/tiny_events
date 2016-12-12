@@ -56,3 +56,4 @@ Event
 - Start Date and Time
 - End Date and Time
 
+Venue has many Events
