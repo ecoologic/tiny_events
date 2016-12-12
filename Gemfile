@@ -10,6 +10,6 @@ gem 'activerecord'
 group :development, :test do
   gem 'pry-meta'
   gem 'pry-stack_explorer'
+  gem 'rspec'
+  gem 'rack-test', require: 'rack/test'
 end
-
-gem 'rspec', group: :test
