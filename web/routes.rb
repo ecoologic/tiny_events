@@ -6,3 +6,10 @@ post '/events' do
 
   { success: true }.to_json
 end
+
+post '/venues' do
+  content_type :json
+  Venue.create(params[:event])
+
+  { success: true }.to_json
+end

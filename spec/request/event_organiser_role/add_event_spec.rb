@@ -16,15 +16,19 @@ RSpec.describe 'POST /events' do
   let(:json_request) { { 'CONTENT_TYPE' => 'application/json', 'ACCEPT' => 'application/json' } }
 
   context "with valid data" do
-    it "creates the event" do
-      post '/events', { event: valid_params }, json_request
+    it "creates the event with those values" do
+      expect do
+        post '/events', { event: valid_params }, json_request
+      end
+        .to change(Event, :count).by 1
 
       expect(last_response.content_type).to eq 'application/json'
       expect(last_response).to be_ok
+      # TODO: CHECK values
     end
   end
 
   context "with invalid data" do
-    xit "returns a convenient error (code and description)"
+    it "returns a convenient error (code and description)"
   end
 end

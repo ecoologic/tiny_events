@@ -21,10 +21,12 @@ ActiveRecord::Schema.define(version: 20161212052337) do
   end
 
   create_table "venues", force: :cascade do |t|
-    t.string "name"
-    t.text   "address_info"
-    t.float  "latitude"
-    t.float  "longitude"
+    t.string  "name"
+    t.text    "address_info"
+    t.float   "latitude"
+    t.float   "longitude"
+    t.integer "event_id"
+    t.index ["event_id"], name: "index_venues_on_event_id"
   end
 
 end
