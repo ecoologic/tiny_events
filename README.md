@@ -5,8 +5,9 @@ A small API to handle events.
 ## Install
 
     bundle
+    bundle exec rake db:create
     rspec # To run the test suite
-    sinatra # TODO
+
 
 Requirements:
 =============

@@ -4,7 +4,6 @@ RSpec.describe "I want to add an event" do
   it "works" do
     get '/test'
 
-    # expect { Sinatra }.to_not raise_error
     expect(last_response).to be_ok
     expect(last_response.content_type).to eq 'application/json'
     expect(JSON.parse(last_response.body)).to eq 'is' => 'a JSON'
@@ -25,8 +24,10 @@ RSpec.describe "I want to add an event" do
 
       context "with valid data" do
         it "creates an event" do
-          # post '/events', event: valid_params
-          # expect(last_response).to be_ok
+          post '/events', event: valid_params
+
+          expect(last_response.content_type).to eq 'application/json'
+          expect(last_response).to be_ok
         end
       end
     end

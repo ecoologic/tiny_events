@@ -6,7 +6,10 @@ gem 'sinatra'
 gem 'sqlite3'
 gem 'json'
 gem 'puma'
+gem 'rake'
+
 gem 'activerecord'
+gem 'sinatra-activerecord'
 
 group :development, :test do
   gem 'pry-meta'

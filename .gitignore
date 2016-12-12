@@ -1,2 +1,2 @@
 tmp/*
-db/db_data
+db/db.sqlite3
