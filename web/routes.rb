@@ -1,3 +1,5 @@
+require 'sinatra'
+
 before { content_type :json }
 
 ## Events
@@ -59,10 +61,12 @@ not_found do
   { success: false }.to_json
 end
 
-# TODO? /api/xx ?
+# FIXME: all fixme
 # TODO: SECURITY?
 # TODO: class MyApp < Sinatra::Base
+# check requirements
 # TODO: id assignment?
 # TODO: RSPEC READS WELL (and comments)
 # WEB dir.. but sinatra IS already web?
 # unit tests!!
+# check readme

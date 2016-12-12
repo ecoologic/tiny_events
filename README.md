@@ -1,11 +1,11 @@
-# Small Events
+# Tiny Events
 
 A small API to handle events.
 
 ## Install
 
     bundle
-    bundle exec rake db:create
+    bundle exec rake db:setup
     rspec # To run the test suite
 
 

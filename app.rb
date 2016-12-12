@@ -1,4 +1,3 @@
-require 'sinatra'
 # TODO: config app
 set :show_exceptions, false
 set :raise_errors, false
