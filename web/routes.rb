@@ -15,6 +15,10 @@ patch '/events/:id' do
   { success: true }.to_json
 end
 
+get '/events' do
+  Event.all.to_json
+end
+
 ## Venues
 
 post '/venues' do
