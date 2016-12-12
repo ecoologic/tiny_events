@@ -8,6 +8,7 @@ RSpec.describe "I want to add an event" do
         it "runs the specs" do
           expect(true).to eq true
           expect { Sinatra }.to_not raise_error
+          expect { DB }.to_not raise_error
         end
       end
     end
