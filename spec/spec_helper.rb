@@ -12,4 +12,4 @@ end
 
 RSpec.configure { |c| c.include RSpecMixin }
 
-require 'pry'
+require 'pry' # TODO: test dev only
