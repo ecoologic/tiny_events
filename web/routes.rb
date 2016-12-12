@@ -19,6 +19,15 @@ get '/events' do
   Event.all.to_json
 end
 
+get '/events/:id' do
+  event = Event.find(params[:id])
+
+  {
+    event: event.attributes,
+    venue: event.venue.attributes
+  }.to_json
+end
+
 ## Venues
 
 post '/venues' do

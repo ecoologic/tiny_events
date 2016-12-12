@@ -11,6 +11,7 @@ RSpec.describe 'GET /events' do
   it "returns all the events" do
     get '/events'
 
+    # TODO? ['events']
     response = JSON.parse(last_response.body)
     # FIXME: temperamental?
     expect(response).to eq [event.attributes]
