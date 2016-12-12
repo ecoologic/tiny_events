@@ -12,12 +12,11 @@ RSpec.describe 'POST /venues' do
       longitude:    '153.383310'
     }
   end
-  let(:json_request) { { 'CONTENT_TYPE' => 'application/json', 'ACCEPT' => 'application/json' } }
 
   context "with valid data (including the event)" do
     it "creates the venue and attaches it to the event" do
       expect do
-        post '/venues', { venue: valid_params }, json_request
+        post '/venues', venue: valid_params
       end
         .to change(Venue, :count).by 1
 

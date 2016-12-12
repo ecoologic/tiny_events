@@ -52,3 +52,4 @@ end
 # TODO: id assignment?
 # TODO: RSPEC READS WELL (and comments)
 # WEB dir.. but sinatra IS already web?
+# unit tests!!

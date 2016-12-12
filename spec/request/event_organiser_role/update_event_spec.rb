@@ -10,16 +10,13 @@ RSpec.describe 'PATCH /events/:id' do
 
   let!(:event) { Event.create! }
 
-  # TODO: EXTRACT
-  let(:json_request) { { 'CONTENT_TYPE' => 'application/json', 'ACCEPT' => 'application/json' } }
-
   context "requesting to cancel the event" do
     let(:event_params) { { event: { cancelled: true } } }
 
     it "marks the event as cancelled" do
       expect do
         # FIXME: REMOVE inlining of params
-        patch "/events/#{event.id}?#{event_params.to_param}", json_request
+        patch "/events/#{event.id}?#{event_params.to_param}"
       end
         .to change(Event, :count).by 0
 
