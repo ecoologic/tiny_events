@@ -18,6 +18,6 @@ RSpec.describe 'GET /events/:id' do
     get "/events/#{event.id}"
 
     response = JSON.parse(last_response.body)
-    expect(response['venue']).to eq event.venue.attributes
+    expect(response['venue']).to eq venue.attributes
   end
 end

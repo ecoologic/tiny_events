@@ -2,13 +2,14 @@ require 'spec_helper'
 
 RSpec.describe "All user stories" do
   it "provide event and venue functionality" do
+
     ## Create
     post '/events', event: {
-      name: "Awesome",
+      name:        "Awesome",
       description: "To be scheduled",
-      cancelled: 'true',
-      starts_at: Time.now,
-      ends_at:   Time.now + 3 * (60 * 60) # +3h
+      cancelled:   'true',
+      starts_at:   Time.now,
+      ends_at:     Time.now + 3 * (60 * 60) # +3h
     }
 
     event = Event.last

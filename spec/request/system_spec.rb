@@ -17,3 +17,12 @@ RSpec.describe 'POST Unexisting routes' do
     expect(last_response.status).to eq 404
   end
 end
+
+RSpec.describe 'PUT Unexisting routes' do
+  it "returns the error in a JSON format" do
+    put '/events/-1', {}
+
+    expect(last_response.content_type).to eq 'application/json'
+    expect(last_response.status).to eq 404
+  end
+end

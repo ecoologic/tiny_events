@@ -16,7 +16,6 @@ group :development, :test do
   gem 'pry-stack_explorer'
   gem 'rspec'
   gem 'rack-test', require: 'rack/test'
-  # TODO: gem 'database-cleaner'
 end
 
-# TODO? strong-params
+# TODO? gem 'database-cleaner', factorygirl, strong-params

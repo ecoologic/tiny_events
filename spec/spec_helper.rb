@@ -1,7 +1,8 @@
-require_relative '../app'
-
+require 'pry'
 require 'rack/test'
 require 'rspec'
+
+require_relative '../app'
 
 ENV['RACK_ENV'] = 'test'
 
@@ -11,5 +12,3 @@ module RSpecMixin
 end
 
 RSpec.configure { |c| c.include RSpecMixin }
-
-require 'pry' # TODO: test dev only

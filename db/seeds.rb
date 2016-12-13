@@ -1,1 +1,1 @@
-# Seeds
+# For rake db:setup

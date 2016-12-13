@@ -4,7 +4,6 @@ require 'spec_helper'
 # I want to add an event
 # So that delegates will know what my event is
 RSpec.describe 'POST /events' do
-  # TODO: FACTORYGIRL?
   let :valid_params do
     {
       name:        "Friendly chat",
@@ -29,6 +28,8 @@ RSpec.describe 'POST /events' do
   end
 
   context "with invalid data" do
-    it "returns a convenient error (code and description)"
+    it "returns a convenient error (code and description)" do
+
+    end
   end
 end
