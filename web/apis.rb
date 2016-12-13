@@ -7,16 +7,16 @@ class App < Sinatra::Application
   ## Events
 
   post '/events' do
-    Event.create(params[:event])
+    event = Event.create(params[:event])
 
-    basic_response(successful: true)
+    saved_resource_response(event)
   end
 
   patch '/events/:id' do
     event = Event.find(params[:id])
     event.update_attributes(params[:event])
 
-    basic_response(successful: true)
+    saved_resource_response(event)
   end
 
   # Returns all future events in chronological order
@@ -34,9 +34,8 @@ class App < Sinatra::Application
   ## Venues
 
   post '/venues' do
-    Venue.create(params[:event])
-
-    basic_response(successful: true)
+    venue = Venue.create(params[:venue])
+    saved_resource_response(venue)
   end
 
   ## System
@@ -49,14 +48,25 @@ class App < Sinatra::Application
   error 500...600 do
     content_type :json
     # binding.pry
-    # basic_response(successful: false, error: $ERROR_INFO.message, location: $ERROR_INFO.backtrace[0])
-    basic_response(successful: false, error: "Something wrong happened.")
+    basic_response(successful: false, errors: ["Something wrong happened."])
   end
 
   private
 
   def basic_response(successful:, **info)
     { success: successful }.merge(info).to_json
+  end
+
+  def saved_resource_response(resource, **extra_info)
+    if resource.invalid?
+      response.status = 422
+      resource_info = { errors: resource.errors.to_a }
+    end
+
+    body = { success: resource.valid? }
+      .merge(resource_info.to_h)
+      .merge(extra_info)
+    body.to_json
   end
 end
 

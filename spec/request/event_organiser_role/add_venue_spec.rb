@@ -13,7 +13,7 @@ RSpec.describe 'POST /venues' do
     }
   end
 
-  context "with valid data (including the event)" do
+  context "with valid data" do
     it "creates the venue and attaches it to the event" do
       expect do
         post '/venues', venue: valid_params
@@ -25,12 +25,19 @@ RSpec.describe 'POST /venues' do
     end
   end
 
-  context "with valid data (excluding the event)" do
-    xit "creates the venue"
-  end
-
   context "with invalid data" do
-    it "returns a convenient error (code and description)"
+    it "returns a convenient error (code and description)" do
+      expect do
+        post '/venues', venue: { latitude: '234' }
+      end
+        .not_to change(Venue, :count)
+
+      expect(last_response.status).to eq 422
+      response = JSON.parse(last_response.body)
+
+      expect(response['success']).to be false
+      expect(response['errors']).to eq ["Longitude can't be blank"]
+    end
   end
 end
 
