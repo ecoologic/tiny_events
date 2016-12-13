@@ -6,14 +6,15 @@ require 'spec_helper'
 RSpec.describe 'GET /events' do
   before { Event.destroy_all }
 
-  let!(:event) { Event.create! }
+  let!(:early_event) { Event.create!(name: "Late",  starts_at: Time.now + 30) }
+  let!(:late_event)  { Event.create!(name: "Early", starts_at: Time.now + 60) }
+  let!(:past_event)  { Event.create!(name: "Past",  starts_at: Time.now - 60) }
 
-  it "returns all the events" do
+  it "returns all the upcoming events in chronological order" do
     get '/events'
 
-    # TODO? ['events']
-    response = JSON.parse(last_response.body)
-    # FIXME: temperamental?
-    expect(response).to eq [event.attributes]
+    actual_events = JSON.parse(last_response.body)['events']
+    actual_event_names = actual_events.map { |e| e['name'] }
+    expect(actual_event_names).to eq([early_event, late_event].map(&:name))
   end
 end

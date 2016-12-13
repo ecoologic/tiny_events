@@ -30,7 +30,7 @@ RSpec.describe "Error responses" do
 
   context "something wrong happens" do
     it "returns the error in a JSON format" do
-      allow(Event).to_receive(anything).and_raise NoMethodError
+      allow(Event).to receive(:ordered).and_raise NoMethodError
 
       get '/events'
 

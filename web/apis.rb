@@ -19,8 +19,10 @@ class App < Sinatra::Application
     basic_response(successful: true)
   end
 
+  # Returns all future events in chronological order
   get '/events' do
-    Event.all.to_json
+    events = Event.starting_after(Time.now).ordered
+    { events: events.map(&:attributes) }.to_json
   end
 
   get '/events/:id' do
@@ -58,12 +60,11 @@ class App < Sinatra::Application
   end
 end
 
-# FIXME: all fixme
 # TODO: missing specs
 # TODO: SECURITY?
 # TODO: id assignment?
 # TODO: RSPEC READS WELL (and comments)
-# unit tests!!
 # check requirements
 # check readme
 # TODO? manage specs?
+# https://nickcharlton.net/posts/structuring-sinatra-applications.html
