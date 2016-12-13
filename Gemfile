@@ -5,7 +5,7 @@ ruby '2.3.1'
 gem 'sinatra'
 gem 'sqlite3'
 gem 'json'
-gem 'puma'
+gem 'thin'
 gem 'rake'
 
 gem 'activerecord'

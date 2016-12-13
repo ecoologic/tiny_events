@@ -6,8 +6,9 @@ A small API to handle events.
 
     bundle
     bundle exec rake db:setup
-    rspec # To run the test suite
-
+    bundle exec rspec # To run the test suite
+    bundle exec rackup
+    curl http://localhost:9292/events # or any other route
 
 Requirements:
 =============

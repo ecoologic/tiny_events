@@ -56,8 +56,8 @@ class App < Sinatra::Application
 end
 
 # FIXME: all fixme
-# TODO: missing specs
 # curl
+# TODO: missing specs
 # TODO: SECURITY?
 # check requirements
 # TODO: id assignment?
