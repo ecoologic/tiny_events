@@ -1,60 +1,64 @@
-before { content_type :json }
+class App < Sinatra::Application
+  before { content_type :json }
 
-## Events
+  ## Events
 
-post '/events' do
-  Event.create(params[:event])
+  post '/events' do
+    Event.create(params[:event])
 
-  basic_response(successful: true)
-end
+    basic_response(successful: true)
+  end
 
-patch '/events/:id' do
-  event = Event.find(params[:id])
-  event.update_attributes(params[:event])
+  patch '/events/:id' do
+    event = Event.find(params[:id])
+    event.update_attributes(params[:event])
 
-  basic_response(successful: true)
-end
+    basic_response(successful: true)
+  end
 
-get '/events' do
-  Event.all.to_json
-end
+  get '/events' do
+    Event.all.to_json
+  end
 
-get '/events/:id' do
-  event = Event.find(params[:id])
+  get '/events/:id' do
+    event = Event.find(params[:id])
 
-  { event: event.attributes, venue: event.venue.attributes }.to_json
-end
+    { event: event.attributes, venue: event.venue.attributes }.to_json
+  end
 
-## Venues
+  ## Venues
 
-post '/venues' do
-  Venue.create(params[:event])
+  post '/venues' do
+    Venue.create(params[:event])
 
-  basic_response(successful: true)
-end
+    basic_response(successful: true)
+  end
 
-## System
+  ## System
 
-not_found do
-  content_type :json
-  basic_response(successful: false)
-end
+  not_found do
+    content_type :json
+    basic_response(successful: false)
+  end
 
-error 500...600 do
-  content_type :json
-  # binding.pry
-  # basic_response(successful: false, error: $ERROR_INFO.message, location: $ERROR_INFO.backtrace[0])
-  basic_response(successful: false, error: "Something wrong happened.")
-end
+  error 500...600 do
+    content_type :json
+    # binding.pry
+    # basic_response(successful: false, error: $ERROR_INFO.message, location: $ERROR_INFO.backtrace[0])
+    basic_response(successful: false, error: "Something wrong happened.")
+  end
 
-def basic_response(successful:, **info)
-  { success: successful }.merge(info).to_json
+  private
+
+  def basic_response(successful:, **info)
+    { success: successful }.merge(info).to_json
+  end
 end
 
 # FIXME: all fixme
 # TODO: missing specs
+# curl
 # TODO: SECURITY?
-# TODO: class MyApp < Sinatra::Base
 # check requirements
 # TODO: id assignment?
 # TODO: RSPEC READS WELL (and comments)
