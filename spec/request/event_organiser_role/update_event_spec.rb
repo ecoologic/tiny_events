@@ -15,8 +15,7 @@ RSpec.describe 'PATCH /events/:id' do
 
     it "marks the event as cancelled" do
       expect do
-        # FIXME: REMOVE inlining of params
-        patch "/events/#{event.id}?#{event_params.to_param}"
+        patch "/events/#{event.id}", event_params
       end
         .to change(Event, :count).by 0
 

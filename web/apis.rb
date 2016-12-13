@@ -1,4 +1,7 @@
 class App < Sinatra::Application
+  set :show_exceptions, false
+  set :raise_errors, false
+
   before { content_type :json }
 
   ## Events
@@ -56,13 +59,11 @@ class App < Sinatra::Application
 end
 
 # FIXME: all fixme
-# curl
 # TODO: missing specs
 # TODO: SECURITY?
-# check requirements
 # TODO: id assignment?
 # TODO: RSPEC READS WELL (and comments)
 # unit tests!!
+# check requirements
 # check readme
 # TODO? manage specs?
-# todo: unit specs?
