@@ -26,10 +26,20 @@ RSpec.describe 'POST /events' do
       expect(Event.last.name).to eq valid_params[:name]
     end
   end
+end
 
-  context "with invalid data" do
-    it "returns a convenient error (code and description)" do
+RSpec.describe 'PATCH /events/:id' do
+  let!(:venue) { Venue.create }
+  let!(:event) { Event.create }
 
+  it "it can associate the event to the venue" do
+    expect do
+      patch "/events/#{event.id}", event: { venue_id: venue.id }
     end
+      .not_to change(Event, :count)
+
+    expect(last_response.content_type).to eq 'application/json'
+    expect(last_response).to be_ok
+    expect(Event.last.venue).to eq venue
   end
 end

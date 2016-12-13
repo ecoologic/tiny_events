@@ -40,7 +40,3 @@ RSpec.describe 'POST /venues' do
     end
   end
 end
-
-RSpec.describe 'PATCH /venues' do
-  xit "it attaches the venue to the event"
-end
