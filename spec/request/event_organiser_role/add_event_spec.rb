@@ -15,6 +15,7 @@ RSpec.describe 'POST /events' do
   end
 
   context "with valid data" do
+    let(:venue) { Venue.create! }
     it "creates the event with those values" do
       expect do
         post '/events', event: valid_params
@@ -25,14 +26,28 @@ RSpec.describe 'POST /events' do
       expect(last_response).to be_ok
       expect(Event.last.name).to eq valid_params[:name]
     end
+
+    it "can create an event with a venue attached" do
+      expect do
+        post '/events', event: { name: "Awesome", venue_id: venue.id }
+      end
+        .to change(Event, :count).by 1
+
+      expect(last_response.content_type).to eq 'application/json'
+      expect(last_response).to be_ok
+      expect(Event.last.venue).to eq venue
+    end
   end
 end
 
+# As an Event Organiser
+# I want to add a venue to my event
+# So that delegates will know where my event is
 RSpec.describe 'PATCH /events/:id' do
-  let!(:venue) { Venue.create }
-  let!(:event) { Event.create }
+  let!(:venue) { Venue.create! }
+  let!(:event) { Event.create! }
 
-  it "it can associate the event to the venue" do
+  it "can associate the event to the venue" do
     expect do
       patch "/events/#{event.id}", event: { venue_id: venue.id }
     end

@@ -60,21 +60,11 @@ class App < Sinatra::Application
   def saved_resource_response(resource, **extra_info)
     if resource.invalid?
       response.status = 422
-      resource_info = { errors: resource.errors.to_a }
+      resource_info   = { errors: resource.errors.to_a }
     end
 
-    body = { success: resource.valid? }
-      .merge(resource_info.to_h)
-      .merge(extra_info)
-    body.to_json
+    basic_response(successful: resource.valid?,
+                   resource_id: resource.id,
+                   **resource_info.to_h.merge(extra_info))
   end
 end
-
-# TODO: missing specs
-# TODO: SECURITY?
-# TODO: id assignment?
-# TODO: RSPEC READS WELL (and comments)
-# check requirements
-# check readme
-# TODO? manage specs?
-# https://nickcharlton.net/posts/structuring-sinatra-applications.html

@@ -10,7 +10,7 @@ RSpec.describe 'PATCH /events/:id' do
 
   let!(:event) { Event.create! }
 
-  context "requesting to cancel the event" do
+  context "requesting to cancel an event" do
     let(:event_params) { { event: { cancelled: true } } }
 
     it "marks the event as cancelled" do
@@ -20,7 +20,6 @@ RSpec.describe 'PATCH /events/:id' do
         .to change(Event, :count).by 0
 
       expect(last_response.content_type).to eq 'application/json'
-      puts last_response.body
       expect(last_response).to be_ok
       expect(event.reload.cancelled?).to eq true
     end

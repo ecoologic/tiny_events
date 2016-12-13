@@ -1,9 +1,8 @@
 require 'spec_helper'
 
-# As an Event Organiser
-# I want to add a venue to my event
-# So that delegates will know where my event is
 RSpec.describe 'POST /venues' do
+  before { Event.destroy_all }
+
   let :valid_params do
     {
       name:         "Arena of the death",
@@ -14,7 +13,7 @@ RSpec.describe 'POST /venues' do
   end
 
   context "with valid data" do
-    it "creates the venue and attaches it to the event" do
+    it "creates the venue" do
       expect do
         post '/venues', venue: valid_params
       end
@@ -22,6 +21,7 @@ RSpec.describe 'POST /venues' do
 
       expect(last_response.content_type).to eq 'application/json'
       expect(last_response).to be_ok
+      expect(JSON.parse(last_response.body)['resource_id'].to_i).to_not eq 0
     end
   end
 
@@ -36,7 +36,7 @@ RSpec.describe 'POST /venues' do
       response = JSON.parse(last_response.body)
 
       expect(response['success']).to be false
-      expect(response['errors']).to eq ["Longitude can't be blank"]
+      expect(response['errors']).to include "Longitude can't be blank"
     end
   end
 end
